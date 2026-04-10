@@ -46,7 +46,7 @@ function rarityColor(label: string): string {
     </span>
 
     <!-- Type image -->
-    <div class="w-20 h-20 rounded-lg overflow-hidden bg-primary-bg dark:bg-dark-bg mb-3 flex-shrink-0">
+    <div class="w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden bg-primary-bg dark:bg-dark-bg mb-2 md:mb-3 flex-shrink-0">
       <img
         :src="getImageUrl(type.image)"
         :alt="type.code"

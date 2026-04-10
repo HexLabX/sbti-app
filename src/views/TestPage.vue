@@ -25,6 +25,7 @@ const {
 
 const direction = ref<'left' | 'right'>('left')
 const touchStartX = ref(0)
+const touchStartY = ref(0)
 
 const answeredIds = computed(() => {
   const set = new Set<string>()
@@ -67,14 +68,17 @@ function handlePrev() {
   }
 }
 
-// Touch swipe handlers
+// Touch swipe handlers — only horizontal swipes, ignore vertical scrolls
 function onTouchStart(e: TouchEvent) {
   touchStartX.value = e.touches[0].clientX
+  touchStartY.value = e.touches[0].clientY
 }
 
 function onTouchEnd(e: TouchEvent) {
   const deltaX = e.changedTouches[0].clientX - touchStartX.value
-  if (Math.abs(deltaX) > 50) {
+  const deltaY = e.changedTouches[0].clientY - touchStartY.value
+  // Only trigger swipe if horizontal movement clearly dominates vertical
+  if (Math.abs(deltaX) > 50 && Math.abs(deltaX) > Math.abs(deltaY) * 1.5) {
     if (deltaX < 0) {
       handleNext()
     } else {
@@ -142,7 +146,7 @@ onUnmounted(() => {
     </div>
 
     <!-- Question area -->
-    <div class="flex-1 flex items-center justify-center px-4 py-8 overflow-hidden">
+    <div class="flex-1 flex items-start justify-center px-4 pt-6 md:pt-8 overflow-auto">
       <Transition :name="direction === 'left' ? 'slide-left' : 'slide-right'" mode="out-in">
         <div v-if="currentQuestion" :key="currentQuestion.id" class="w-full">
           <QuestionCard
@@ -155,7 +159,7 @@ onUnmounted(() => {
     </div>
 
     <!-- Navigation buttons -->
-    <div class="max-w-xl mx-auto w-full px-4 pb-4">
+    <div class="max-w-xl mx-auto w-full px-4 pb-4 pt-2 safe-bottom">
       <div class="flex items-center justify-between gap-4">
         <button
           @click="handlePrev"
@@ -182,8 +186,8 @@ onUnmounted(() => {
       </div>
     </div>
 
-    <!-- Dot indicator fixed at bottom -->
-    <div class="pb-6 pt-2">
+    <!-- Dot indicator -->
+    <div class="pb-4 pt-1 safe-bottom">
       <DotIndicator
         :total="totalQuestions"
         :current="currentIndex"

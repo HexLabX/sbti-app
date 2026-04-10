@@ -57,13 +57,13 @@ function restartTest() {
   <div v-if="result && type" class="min-h-screen bg-primary-page dark:bg-dark-bg transition-colors duration-200">
     <NavBar :show-nav="true" />
 
-    <main class="max-w-2xl mx-auto px-4 py-8">
+    <main class="max-w-2xl mx-auto px-4 py-4 md:py-8 safe-bottom">
       <!-- Poster card -->
       <section class="rounded-2xl overflow-hidden shadow-lg mb-8">
         <!-- Gradient header -->
-        <div class="bg-gradient-to-br from-primary to-primary-light p-8 text-center text-white">
+        <div class="bg-gradient-to-br from-primary to-primary-light p-5 md:p-8 text-center text-white">
           <!-- Type image -->
-          <div class="w-32 h-32 mx-auto mb-4 rounded-xl overflow-hidden bg-white/20 flex items-center justify-center">
+          <div class="w-36 h-36 md:w-44 md:h-44 mx-auto mb-3 md:mb-4 rounded-xl overflow-hidden bg-white/20 flex items-center justify-center">
             <img
               :src="getImageUrl(type.image)"
               :alt="type.code"
@@ -71,15 +71,15 @@ function restartTest() {
               @error="handleImgError"
             />
             <div
-              class="absolute w-32 h-32 items-center justify-center text-4xl font-bold hidden"
+              class="absolute w-36 h-36 md:w-44 md:h-44 items-center justify-center text-4xl md:text-5xl font-bold hidden"
             >
               {{ type.code }}
             </div>
           </div>
 
           <!-- Code + Chinese name -->
-          <h1 class="text-3xl font-bold">{{ type.code }}</h1>
-          <p class="text-xl mt-1 opacity-90">{{ type.cn }}</p>
+          <h1 class="text-2xl md:text-3xl font-bold">{{ type.code }}</h1>
+          <p class="text-lg md:text-xl mt-1 opacity-90">{{ type.cn }}</p>
 
           <!-- Intro quote -->
           <p class="mt-3 text-sm italic opacity-80 max-w-sm mx-auto leading-relaxed">

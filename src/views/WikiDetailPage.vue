@@ -68,7 +68,7 @@ const isNotFound = computed(() => !type.value)
     <NavBar :show-nav="true" />
 
     <!-- 404 state -->
-    <main v-if="isNotFound" class="max-w-2xl mx-auto px-4 py-20 text-center">
+    <main v-if="isNotFound" class="max-w-2xl mx-auto px-4 py-16 md:py-20 text-center">
       <p class="text-6xl mb-4">?</p>
       <h1 class="text-xl font-bold text-gray-800 dark:text-dark-text mb-2">
         未找到人格 "{{ code }}"
@@ -89,7 +89,7 @@ const isNotFound = computed(() => !type.value)
     </main>
 
     <!-- Type detail -->
-    <main v-else-if="type" class="max-w-2xl mx-auto px-4 py-8">
+    <main v-else-if="type" class="max-w-2xl mx-auto px-4 py-4 md:py-8 safe-bottom">
       <!-- Back to wiki -->
       <button
         @click="router.push('/wiki')"

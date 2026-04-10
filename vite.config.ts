@@ -4,5 +4,6 @@ import { resolve } from 'path'
 
 export default defineConfig({
   plugins: [vue()],
+  base: '/sbti/',
   resolve: { alias: { '@': resolve(__dirname, 'src') } },
 })
